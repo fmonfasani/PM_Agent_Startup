@@ -1,0 +1,111 @@
+{
+  "core_backend": {
+    "name": "core_backend",
+    "spec": {
+      "name": "core_backend",
+      "type": "backend",
+      "description": "Core backend API with authentication and base functionality",
+      "dependencies": [],
+      "agents_needed": [
+        "backend"
+      ],
+      "complexity": 0,
+      "estimated_hours": 18,
+      "tech_stack": [
+        "backend: Node.js con Express"
+      ],
+      "apis_needed": [
+        "auth",
+        "users",
+        "health"
+      ],
+      "database_entities": [
+        "users",
+        "sessions"
+      ]
+    },
+    "status": "ready",
+    "progress": 0.0,
+    "start_time": null,
+    "end_time": null,
+    "assigned_agents": [],
+    "deliverables": {},
+    "dependencies_met": [],
+    "blockers": [],
+    "metrics": {}
+  },
+  "core_frontend": {
+    "name": "core_frontend",
+    "spec": {
+      "name": "core_frontend",
+      "type": "frontend",
+      "description": "Core frontend application with routing and base components",
+      "dependencies": [
+        "core_backend"
+      ],
+      "agents_needed": [
+        "frontend"
+      ],
+      "complexity": 0,
+      "estimated_hours": 14,
+      "tech_stack": [
+        "frontend: React con JSX"
+      ],
+      "apis_needed": [
+        "auth",
+        "users"
+      ],
+      "database_entities": []
+    },
+    "status": "planned",
+    "progress": 0.0,
+    "start_time": null,
+    "end_time": null,
+    "assigned_agents": [],
+    "deliverables": {},
+    "dependencies_met": [],
+    "blockers": [],
+    "metrics": {}
+  },
+  "global_qa": {
+    "name": "global_qa",
+    "spec": {
+      "name": "global_qa",
+      "type": "qa",
+      "description": "Global testing and quality assurance for the entire project",
+      "dependencies": [
+        "Implementar una interfaz de usuario simple y intuitiva",
+        "Configurar la base de datos MongoDB para almacenar datos de manera eficiente",
+        "Desarrollar un sistema de cache utilizando Redis para mejorar la velocidad de respuesta",
+        "Implementar un sistema de procesamiento asincrono utilizando RabbitMQ",
+        "Configurar Elasticsearch para realizar b\u00fasquedas avanzadas en caso de necesidad",
+        "Monitorear el rendimiento del sistema utilizando Prometheus y Grafana",
+        "Escribir pruebas unitarias y de integraci\u00f3n utilizando Jest y Cypress",
+        "core_backend",
+        "core_frontend"
+      ],
+      "agents_needed": [
+        "qa"
+      ],
+      "complexity": 3,
+      "estimated_hours": 9,
+      "tech_stack": [
+        "Jest",
+        "Cypress",
+        "Postman",
+        "K6"
+      ],
+      "apis_needed": [],
+      "database_entities": []
+    },
+    "status": "planned",
+    "progress": 0.0,
+    "start_time": null,
+    "end_time": null,
+    "assigned_agents": [],
+    "deliverables": {},
+    "dependencies_met": [],
+    "blockers": [],
+    "metrics": {}
+  }
+}

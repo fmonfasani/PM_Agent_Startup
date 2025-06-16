@@ -13,10 +13,11 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
 from enum import Enum
 
-from .planner import ProjectPlanner
+from .planner import ProjectPlanner, ModuleSpec
 from .agent_spawner import AgentSpawner
 from .module_manager import ModuleManager
 from .task_orchestrator import TaskOrchestrator
+
 
 
 class ProjectStatus(Enum):
@@ -398,7 +399,7 @@ class PMBotEnterprise:
             "id": project.id,
             "config": asdict(project.config),
             "status": project.status.value,
-            "modules": project.modules,
+            "modules": {name: asdict(module) for name, module in project.modules.items()},  # ← FIX AQUÍ
             "agents": project.agents,
             "progress": project.progress,
             "start_time": project.start_time.isoformat(),
@@ -423,12 +424,16 @@ class PMBotEnterprise:
                 project_data = json.load(f)
             
             config = ProjectConfig(**project_data["config"])
+
+            modules = {}
+            for name, module_data in project_data["modules"].items():
+                modules[name] = ModuleSpec(**module_data)
             
             project = ProjectState(
                 id=project_data["id"],
                 config=config,
                 status=ProjectStatus(project_data["status"]),
-                modules=project_data["modules"],
+                modules=modules, 
                 agents=project_data["agents"],
                 progress=project_data["progress"],
                 start_time=datetime.fromisoformat(project_data["start_time"]),
