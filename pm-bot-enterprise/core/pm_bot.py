@@ -9,6 +9,7 @@ import json
 import logging
 import os
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
 from enum import Enum
@@ -64,6 +65,18 @@ class PMBotEnterprise:
     def __init__(self, config_path: str = "config/pm_config.json"):
         self.config_path = config_path
         self.projects: Dict[str, ProjectState] = {}
+        
+        # Cargar proyectos existentes automáticamente (después de logging)
+        try:
+            self._load_existing_projects()
+        except Exception as e:
+            print(f"Warning: Could not load existing projects: {e}")
+        
+        # Cargar proyectos existentes automáticamente (después de logging)
+        try:
+            self._load_existing_projects()
+        except Exception as e:
+            print(f"Warning: Could not load existing projects: {e}")
         self.active_project: Optional[str] = None
         
         # Componentes del sistema
@@ -410,6 +423,72 @@ class PMBotEnterprise:
         return True
     
     # En core/pm_bot.py - método save_project_state
+    def _load_existing_projects(self):
+        """Cargar todos los proyectos existentes desde disco"""
+        try:
+            from pathlib import Path
+            data_dir = Path("data")
+            if not data_dir.exists():
+                return
+            
+            project_files = list(data_dir.glob("project_*.json"))
+            loaded_count = 0
+            
+            for project_file in project_files:
+                try:
+                    project_id = project_file.stem.replace("project_", "")
+                    if self.load_project_state(project_id):
+                        loaded_count += 1
+                except Exception as e:
+                    if hasattr(self, 'logger'):
+                        self.logger.warning(f"Could not load project from {project_file}: {e}")
+                    else:
+                        print(f"Warning: Could not load project from {project_file}: {e}")
+            
+            if loaded_count > 0:
+                if hasattr(self, 'logger'):
+                    self.logger.info(f"Loaded {loaded_count} existing projects")
+                else:
+                    print(f"Info: Loaded {loaded_count} existing projects")
+        except Exception as e:
+            if hasattr(self, 'logger'):
+                self.logger.error(f"Error loading existing projects: {e}")
+            else:
+                print(f"Error loading existing projects: {e}")
+
+    def _load_existing_projects(self):
+        """Cargar todos los proyectos existentes desde disco"""
+        try:
+            from pathlib import Path
+            data_dir = Path("data")
+            if not data_dir.exists():
+                return
+            
+            project_files = list(data_dir.glob("project_*.json"))
+            loaded_count = 0
+            
+            for project_file in project_files:
+                try:
+                    project_id = project_file.stem.replace("project_", "")
+                    if self.load_project_state(project_id):
+                        loaded_count += 1
+                except Exception as e:
+                    if hasattr(self, 'logger'):
+                        self.logger.warning(f"Could not load project from {project_file}: {e}")
+                    else:
+                        print(f"Warning: Could not load project from {project_file}: {e}")
+            
+            if loaded_count > 0:
+                if hasattr(self, 'logger'):
+                    self.logger.info(f"Loaded {loaded_count} existing projects")
+                else:
+                    print(f"Info: Loaded {loaded_count} existing projects")
+        except Exception as e:
+            if hasattr(self, 'logger'):
+                self.logger.error(f"Error loading existing projects: {e}")
+            else:
+                print(f"Error loading existing projects: {e}")
+
     async def save_project_state(self, project_id: str):
         """Persistir estado del proyecto"""
         if project_id not in self.projects:
@@ -445,7 +524,7 @@ class PMBotEnterprise:
         with open(project_file, 'w') as f:
             json.dump(project_data, f, indent=2, default=str)
     
-    async def load_project_state(self, project_id: str) -> bool:
+    def load_project_state(self, project_id: str) -> bool:
         """Cargar estado del proyecto desde disco"""
         project_file = f"data/project_{project_id}.json"
         

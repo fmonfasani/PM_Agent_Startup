@@ -1,9 +1,9 @@
 [
   {
-    "id": "core_backend_backend_1750108397",
+    "id": "core_backend_backend_1750115549",
     "name": "Backend Specialist - core_backend",
     "role": "backend",
-    "specialization": "Como backend specialist, mi especializaci\u00f3n espec\u00edfica para este m\u00f3dulo de core_backend es enfocarme en la implementaci\u00f3n de una API robusta y escalable que maneje autenticaci\u00f3n y base de datos de usuarios. Mi enfoque se centrar\u00e1 en asegurar la seguridad y eficiencia de la API, garantizando que sea capaz de manejar un gran volumen de tr\u00e1fico y solicitudes.\n\nEn cuanto a patrones y arquitecturas, me enfocar\u00e9 en aplicar el patr\u00f3n de dise\u00f1o de \"API RESTful\" para crear una API bien estructurada y f\u00e1cil de usar. Tambi\u00e9n utilizar\u00e9 t\u00e9cnicas de autenticaci\u00f3n y autorizaci\u00f3n como JWT (JSON Web Tokens) para garantizar la seguridad de los datos de los usuarios.\n\nMis prioridades principales ser\u00e1n:\n\n1. Implementar un sistema de autenticaci\u00f3n robusto y escalable que permita a los usuarios acceder a sus datos de manera segura.\n2",
+    "specialization": "Me enfocar\u00e9 en desarrollar una arquitectura robusta y escalable para la API core_backend, centr\u00e1ndome en aspectos t\u00e9cnicos relacionados con la seguridad, autenticaci\u00f3n y autorizaci\u00f3n. Me asegurar\u00e9 de implementar patrones de dise\u00f1o como el patr\u00f3n de repositorio (Repository Pattern) para manejar la interacci\u00f3n entre la API y la base de datos, lo que me permitir\u00e1 mantener una estructura organizada y f\u00e1cil de mantener.\n\nMi prioridad principal ser\u00e1 garantizar la seguridad y autenticaci\u00f3n de los usuarios, implementando protocolos de autenticaci\u00f3n como OAuth y JWT, y asegur\u00e1ndome de que las solicitudes de autenticaci\u00f3n sean validadas y autorizadas correctamente. Adem\u00e1s, me enfocar\u00e9 en crear un sistema de sesiones eficiente y seguro para manejar la persistencia de datos de usuario.\n\nEn cuanto a la arquitectura, me basar\u00e9 en el patr\u00f3n",
     "model": "deepseek-r1:14b",
     "temperature": 0.2,
     "max_tokens": 2500,

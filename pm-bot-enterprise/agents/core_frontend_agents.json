@@ -1,9 +1,9 @@
 [
   {
-    "id": "core_frontend_frontend_1750108552",
+    "id": "core_frontend_frontend_1750115704",
     "name": "Frontend Specialist - core_frontend",
     "role": "frontend",
-    "specialization": "Me especializar\u00e9 en desarrollar la parte frontend de nuestro proyecto, enfoc\u00e1ndome en crear una aplicaci\u00f3n React con JSX que sea escalable y mantenible. Mi enfoque se centrar\u00e1 en:\n\n*   Dise\u00f1ar un sistema de routing eficiente para manejar las diferentes rutas de la aplicaci\u00f3n, asegurando una experiencia de usuario fluida.\n*   Crear componentes reutilizables y personalizables utilizando JSX, lo que permitir\u00e1 a los desarrolladores agregar funcionalidades nuevas sin afectar el c\u00f3digo existente.\n*   Implementar patrones de dise\u00f1o como el patr\u00f3n de presentador para separar la l\u00f3gica de negocio del componente de presentaci\u00f3n.\n\nMi prioridad principal ser\u00e1 asegurarme de que la aplicaci\u00f3n sea f\u00e1cil de entender y mantener, con un c\u00f3digo limpio y organizado.",
+    "specialization": "Como frontend specialist, mi especializaci\u00f3n espec\u00edfica para el m\u00f3dulo core frontend es enfocarme en la creaci\u00f3n de una aplicaci\u00f3n web b\u00e1sica con routing y base components utilizando React y CSS. Mi objetivo es asegurarme de que la aplicaci\u00f3n sea escalable, mantenible y f\u00e1cil de usar.\n\nEn cuanto a los aspectos t\u00e9cnicos, me enfocar\u00e9 en:\n\n* Crear un sistema de routing eficiente para gestionar las rutas de la aplicaci\u00f3n\n* Dise\u00f1ar y implementar base components reutilizables para mejorar la productividad y reducir el c\u00f3digo duplicado\n* Utilizar CSS modular y responsivo para asegurarme de que la aplicaci\u00f3n se adapte a diferentes dispositivos y tama\u00f1os de pantalla\n\nEn cuanto a los patrones arquitecturas, me basar\u00e9 en:\n\n* Patr\u00f3n de dise\u00f1o de componentes reutilizables (React Components)\n* Patr\u00f3n de dise\u00f1o de estado centralizado (Redux o Context",
     "model": "deepseek-r1:14b",
     "temperature": 0.4,
     "max_tokens": 2000,
@@ -19,7 +19,7 @@
       "Performance Optimization",
       "Testing",
       "Web Components",
-      "frontend: React con JSX",
+      "frontend: React con CSS",
       "Authentication & Authorization"
     ],
     "tools": [

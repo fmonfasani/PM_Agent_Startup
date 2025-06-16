@@ -1,9 +1,9 @@
 [
   {
-    "id": "global_qa_qa_1750108702",
+    "id": "global_qa_qa_1750115864",
     "name": "Qa Specialist - global_qa",
     "role": "qa",
-    "specialization": "Me alegra trabajar en el m\u00f3dulo global_QA de este proyecto. Como QA Specialist, mi especializaci\u00f3n espec\u00edfica para este m\u00f3dulo es la siguiente:\n\n**Enfocarme en:** Enfocarme en garantizar la calidad y estabilidad del c\u00f3digo, asegurando que las APIs y la l\u00f3gica de negocio sean testeadas exhaustivamente con herramientas como Jest y Cypress. Tambi\u00e9n me enfocar\u00e9 en probar la integraci\u00f3n de las APIs con Postman y K6 para asegurar que se cumplan los requisitos de rendimiento y escalabilidad.\n\n**Patrones/arquitecturas:** Aplicar\u00e9 patrones de dise\u00f1o como el patr\u00f3n de inyecci\u00f3n de dependencias (Dependency Injection) para facilitar la testeo y la mantenibilidad del c\u00f3digo. Tambi\u00e9n me enfocar\u00e9 en seguir las mejores pr\u00e1cticas de codificaci\u00f3n, como la escritura de pruebas unitarias y de integraci\u00f3n.\n\n**Prioridades",
+    "specialization": "\u00a1Excelente! Me alegra trabajar en el m\u00f3dulo global QA para nuestro proyecto de p\u00e1gina web b\u00e1sica. Como QA specialist, mi especializaci\u00f3n espec\u00edfica se enfocar\u00e1 en garantizar la calidad y estabilidad del producto final.\n\nEn este m\u00f3dulo, me enfocar\u00e9 en:\n\n*   **Pruebas unitarias con Jest**: Me asegurar\u00e9 de escribir pruebas unitarias para cada componente de c\u00f3digo, utilizando Jest como herramienta de prueba. Esto garantizar\u00e1 que cada funci\u00f3n de c\u00f3digo funcione correctamente y no introduce errores cr\u00edticos.\n*   **Pruebas de integraci\u00f3n con Cypress**: Utilizar\u00e9 Cypress para realizar pruebas de integraci\u00f3n entre los diferentes componentes del sistema. Esto me permitir\u00e1 verificar que las interacciones entre los componentes funcionen correctamente y no causan errores.\n*   **Pruebas de rendimiento con K6**: Para asegurarme de que el sistema sea escalable y pueda manejar un gran n\u00famero de",
     "model": "deepseek-r1:14b",
     "temperature": 0.2,
     "max_tokens": 1800,
