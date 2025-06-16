@@ -1,0 +1,121 @@
+{
+  "standard_module_trio": {
+    "name": "Standard Module Trio",
+    "description": "Backend + Frontend + QA standard configuration",
+    "agents": [
+      {
+        "role": "backend",
+        "count": 1,
+        "specialization": "API development and database design"
+      },
+      {
+        "role": "frontend", 
+        "count": 1,
+        "specialization": "React/TypeScript UI development"
+      },
+      {
+        "role": "qa",
+        "count": 1,
+        "specialization": "Testing and quality assurance"
+      }
+    ],
+    "estimated_hours": 40,
+    "complexity_range": [3, 7],
+    "tech_stack": ["Node.js", "React", "PostgreSQL", "Jest", "Cypress"]
+  },
+  
+  "qa_agent": {
+    "role": "qa",
+    "personality": "Meticulous quality assurance specialist focused on comprehensive testing and bug prevention",
+    "expertise": [
+      "Test Automation",
+      "Unit Testing with Jest",
+      "Integration Testing",
+      "End-to-End Testing with Cypress",
+      "Performance Testing",
+      "Security Testing",
+      "API Testing with Postman",
+      "Load Testing with K6",
+      "Test Planning and Strategy",
+      "Bug Tracking and Reporting",
+      "Quality Metrics and KPIs",
+      "Accessibility Testing",
+      "Cross-browser Testing",
+      "Mobile Testing",
+      "Regression Testing"
+    ],
+    "tools": [
+      "jest",
+      "cypress", 
+      "playwright",
+      "postman",
+      "k6",
+      "selenium",
+      "jmeter",
+      "lighthouse",
+      "axe-core",
+      "browserstack"
+    ],
+    "model_preference": "claude-3-5-sonnet",
+    "temperature": 0.2,
+    "max_tokens": 2000,
+    "task_types": [
+      "test_planning",
+      "test_implementation", 
+      "test_execution",
+      "bug_reporting",
+      "quality_review",
+      "performance_analysis"
+    ]
+  },
+  
+  "deploy_agent": {
+    "role": "devops",
+    "personality": "Systematic DevOps engineer specializing in automation, deployment, and infrastructure reliability",
+    "expertise": [
+      "Docker Containerization",
+      "Kubernetes Orchestration", 
+      "CI/CD Pipeline Design",
+      "GitHub Actions",
+      "GitLab CI",
+      "Infrastructure as Code",
+      "Terraform",
+      "Ansible",
+      "AWS/Azure/GCP Deployment",
+      "Monitoring and Alerting",
+      "Prometheus/Grafana",
+      "ELK Stack",
+      "Security Hardening",
+      "SSL/TLS Configuration",
+      "Load Balancing",
+      "Auto-scaling",
+      "Backup Strategies",
+      "Disaster Recovery"
+    ],
+    "tools": [
+      "docker",
+      "kubectl", 
+      "helm",
+      "terraform",
+      "ansible",
+      "aws-cli",
+      "azure-cli",
+      "gcloud",
+      "prometheus",
+      "grafana",
+      "nginx",
+      "certbot"
+    ],
+    "model_preference": "qwen2.5-coder:7b",
+    "temperature": 0.1,
+    "max_tokens": 2500,
+    "task_types": [
+      "infrastructure_design",
+      "deployment_configuration",
+      "ci_cd_setup",
+      "monitoring_setup",
+      "security_hardening",
+      "performance_optimization"
+    ]
+  }
+}

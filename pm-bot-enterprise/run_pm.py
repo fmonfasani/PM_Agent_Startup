@@ -273,7 +273,6 @@ async def handle_custom_project(pm_bot):
                 # Mostrar resumen
                 status = await pm_bot.get_project_status(project_id)
                 print(f"📊 Progreso: {status['progress']:.1f}%")
-                print(f"📁 Ubicación: {pm_bot.projectConfig.workingDir}")
             else:
                 print("❌ El proyecto falló durante la ejecución")
         else:
@@ -388,7 +387,7 @@ async def batch_mode(prompt_file: str, auto_execute: bool = False):
     
     if not os.path.exists(prompt_file):
         print(f"❌ Archivo no encontrado: {prompt_file}")
-        return
+        return False
     
     with open(prompt_file, 'r') as f:
         description = f.read().strip()
@@ -427,8 +426,145 @@ async def batch_mode(prompt_file: str, auto_execute: bool = False):
         return False
 
 
+async def check_models():
+    """Verificar modelos AI disponibles"""
+    print("🔍 Verificando modelos AI disponibles...")
+    
+    try:
+        from core.ai_interface import AIInterface
+        ai = AIInterface()
+        
+        # Verificar estado de salud
+        health = await ai.health_check()
+        
+        print(f"\n📊 Estado de AI:")
+        print(f"🔧 Ollama Local: {'✅ Disponible' if health['local']['available'] else '❌ No disponible'}")
+        
+        if health['local']['available']:
+            print(f"📦 Modelos locales ({len(health['local']['models'])}):")
+            for model in health['local']['models']:
+                print(f"   • {model}")
+        
+        if health['cloud']['available']:
+            print(f"☁️ Servicios cloud: {', '.join(health['cloud']['services'])}")
+        
+        # Probar generación
+        print("\n🧪 Probando generación de respuesta...")
+        response = await ai.generate_response("Hola, ¿estás funcionando?", max_tokens=50)
+        print(f"✅ Respuesta: {response[:100]}...")
+        
+    except Exception as e:
+        print(f"❌ Error verificando modelos: {e}")
+        print("💡 Asegúrate de tener Ollama instalado y funcionando")
+
+
 def main():
     """Función principal"""
     
     parser = argparse.ArgumentParser(
-        description="PM Bot Enterprise - Sistema de Gest
+        description="PM Bot Enterprise - Sistema de Gestión de Proyectos con Agentes IA",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Ejemplos de uso:
+  python run_pm.py                                    # Modo interactivo
+  python run_pm.py --setup                           # Configurar entorno
+  python run_pm.py --check-models                    # Verificar modelos AI
+  python run_pm.py --prompt "Crear blog con React"   # Crear proyecto directo
+  python run_pm.py --file prompts/startup_saas.txt   # Ejecutar desde archivo
+  python run_pm.py --dashboard                       # Iniciar dashboard web
+        """
+    )
+    
+    # Argumentos principales
+    parser.add_argument('--prompt', type=str, help='Descripción del proyecto a crear')
+    parser.add_argument('--file', type=str, help='Archivo con descripción del proyecto')
+    parser.add_argument('--auto', action='store_true', help='Ejecutar proyecto automáticamente')
+    
+    # Configuración y setup
+    parser.add_argument('--setup', action='store_true', help='Configurar entorno inicial')
+    parser.add_argument('--check-models', action='store_true', help='Verificar modelos AI disponibles')
+    parser.add_argument('--load-examples', action='store_true', help='Cargar prompts de ejemplo')
+    
+    # Dashboard
+    parser.add_argument('--dashboard', action='store_true', help='Iniciar dashboard web')
+    parser.add_argument('--host', default='127.0.0.1', help='Host para dashboard (default: 127.0.0.1)')
+    parser.add_argument('--port', type=int, default=5000, help='Puerto para dashboard (default: 5000)')
+    
+    # Métricas y estado
+    parser.add_argument('--metrics', action='store_true', help='Mostrar métricas del sistema')
+    parser.add_argument('--status', action='store_true', help='Mostrar estado del sistema')
+    
+    # Configuración avanzada
+    parser.add_argument('--config', type=str, help='Archivo de configuración personalizado')
+    parser.add_argument('--log-level', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'], 
+                       default='INFO', help='Nivel de logging')
+    
+    args = parser.parse_args()
+    
+    # Configurar logging
+    import logging
+    logging.basicConfig(level=getattr(logging, args.log_level))
+    
+    # Ejecutar según argumentos
+    try:
+        if args.setup:
+            setup_environment()
+            load_example_prompts()
+            
+        elif args.check_models:
+            asyncio.run(check_models())
+            
+        elif args.load_examples:
+            load_example_prompts()
+            
+        elif args.dashboard:
+            print("🚀 Iniciando Dashboard Web...")
+            try:
+                from dashboard.app import DashboardApp
+                dashboard = DashboardApp()
+                dashboard.run(host=args.host, port=args.port, debug=False)
+            except ImportError:
+                print("❌ Dashboard no disponible. Instala Flask: pip install flask flask-cors")
+            
+        elif args.metrics:
+            pm_bot = PMBotEnterprise()
+            show_system_metrics(pm_bot)
+            
+        elif args.status:
+            asyncio.run(check_models())
+            
+        elif args.prompt:
+            # Modo directo con prompt
+            async def run_prompt():
+                pm_bot = PMBotEnterprise()
+                project_id = await pm_bot.create_project(args.prompt)
+                print(f"✅ Proyecto creado: {project_id}")
+                
+                if args.auto:
+                    success = await pm_bot.execute_project(project_id)
+                    print(f"{'✅ Completado' if success else '❌ Falló'}")
+                    return success
+                return True
+            
+            success = asyncio.run(run_prompt())
+            sys.exit(0 if success else 1)
+            
+        elif args.file:
+            # Modo batch desde archivo
+            success = asyncio.run(batch_mode(args.file, args.auto))
+            sys.exit(0 if success else 1)
+            
+        else:
+            # Modo interactivo por defecto
+            asyncio.run(interactive_mode())
+            
+    except KeyboardInterrupt:
+        print("\n👋 ¡Hasta luego!")
+        sys.exit(0)
+    except Exception as e:
+        print(f"❌ Error fatal: {e}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

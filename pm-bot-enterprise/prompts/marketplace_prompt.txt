@@ -1,0 +1,163 @@
+# marketplace_prompt.txt
+Desarrollar marketplace completo de productos artesanales con las siguientes características:
+
+## Funcionalidades Principales
+- Sistema de vendedores independientes con perfiles verificados
+- Catálogo de productos con categorías y subcategorías
+- Búsqueda avanzada con filtros (precio, ubicación, categoría, calificación)
+- Carrito de compras multi-vendedor
+- Sistema de checkout unificado
+- Pagos seguros con Stripe y PayPal
+- Gestión de envíos con múltiples transportistas
+- Sistema de reviews y calificaciones bidireccional
+- Chat en tiempo real entre compradores y vendedores
+- Panel de analytics para vendedores
+- Sistema de comisiones automatizado
+- Gestión de disputas y devoluciones
+
+## Características Técnicas
+- Aplicación web responsive (React + TypeScript)
+- App móvil nativa (React Native)
+- API REST robusta con documentación
+- Base de datos escalable (PostgreSQL + Redis)
+- Sistema de notificaciones push y email
+- Integración con redes sociales
+- SEO optimizado
+- Soporte multi-idioma (español/inglés)
+- Panel de administración completo
+
+## Requerimientos de Negocio
+- Soporte para 10,000+ productos
+- 1,000+ vendedores simultáneos  
+- 50,000+ usuarios registrados
+- Procesamiento de 1,000+ pedidos diarios
+- Uptime del 99.9%
+- Tiempo de carga < 3 segundos
+
+## Stack Tecnológico Preferido
+- Backend: Node.js + Express + TypeScript
+- Frontend: React + Next.js + Tailwind CSS
+- Base de datos: PostgreSQL + Redis
+- Mobile: React Native + Expo
+- Pagos: Stripe + PayPal
+- Búsqueda: Elasticsearch
+- Storage: AWS S3
+- Deployment: Docker + AWS/Azure
+
+## Timeline y Presupuesto
+- Timeline: 6 meses
+- Presupuesto: Enterprise ($200,000)
+- Equipo: 8-10 desarrolladores
+- Compliance: PCI DSS, GDPR
+
+## Entregables Esperados
+- Aplicación web completa
+- Aplicación móvil iOS/Android
+- Panel de administración
+- API documentada
+- Tests automatizados
+- Documentación técnica
+- Manual de usuario
+- Plan de deployment
+
+---
+
+# startup_example_1.txt
+Crear plataforma SaaS de gestión de proyectos para startups y equipos remotos:
+
+## Visión del Producto
+Una herramienta integral de gestión de proyectos que combine la simplicidad de uso con potentes características de colaboración, diseñada específicamente para startups y equipos distribuidos.
+
+## Funcionalidades Core
+- Dashboard personalizable con widgets
+- Gestión de proyectos con metodologías ágiles (Scrum/Kanban)
+- Sistema de tareas con asignaciones y dependencias
+- Timeline y roadmaps visuales
+- Colaboración en tiempo real
+- Chat integrado por proyecto
+- Videollamadas integradas
+- Gestión de documentos y archivos
+- Sistema de notificaciones inteligentes
+- Tracking de tiempo automático
+- Reportes y analytics avanzados
+- Integración con herramientas populares (Slack, GitHub, Figma)
+
+## Características de Usuario
+- Autenticación multi-factor
+- Perfiles de usuario personalizables
+- Sistema de roles y permisos granular
+- Invitación por email y onboarding
+- Tutorial interactivo para nuevos usuarios
+- Configuración de workspace por equipo
+
+## Funcionalidades Premium
+- Automatizaciones avanzadas
+- Templates de proyecto personalizados
+- API completa para integraciones
+- Almacenamiento ilimitado
+- Soporte prioritario
+- Analytics predictivos con IA
+- Exportación de datos avanzada
+
+## Especificaciones Técnicas
+- Arquitectura: Microservicios
+- Real-time: WebSockets para colaboración
+- Performance: Carga < 2 segundos
+- Escalabilidad: 100,000+ usuarios
+- Disponibilidad: 99.9% uptime
+- Seguridad: SOC 2 compliant
+
+## Stack Tecnológico
+- Backend: Node.js + Express + TypeScript
+- Frontend: React + Next.js + TypeScript
+- Database: PostgreSQL + Redis
+- Real-time: Socket.io
+- Queue: Bull/Redis
+- Auth: Auth0 o custom JWT
+- Storage: AWS S3
+- CDN: CloudFront
+- Search: Elasticsearch (opcional)
+
+## Aplicación Móvil
+- React Native + Expo
+- Funcionalidades offline básicas
+- Push notifications
+- Biometric authentication
+- Sincronización automática
+
+## Integraciones Planeadas
+- Slack/Discord
+- GitHub/GitLab
+- Figma/Adobe XD
+- Google Workspace
+- Microsoft 365
+- Zoom/Google Meet
+- Stripe para pagos
+- Zapier para automatizaciones
+
+## Plan de Monetización
+- Freemium: 5 usuarios, 3 proyectos
+- Starter: $10/mes por usuario
+- Professional: $20/mes por usuario  
+- Enterprise: $50/mes por usuario + custom features
+
+## Configuración del Proyecto
+- Timeline: 4 meses MVP + 2 meses refinamiento
+- Presupuesto: Startup ($75,000)
+- Equipo: 6-8 desarrolladores
+- Metodología: Agile/Scrum con sprints de 2 semanas
+- Compliance: GDPR, SOC 2
+
+## Métricas de Éxito
+- 1,000 usuarios registrados en 3 meses
+- 80% retention rate mensual
+- < 5% churn rate
+- NPS score > 50
+- 95% uptime en producción
+
+## Roadmap Post-Launch
+- Integración con IA para sugerencias
+- App desktop (Electron)
+- Marketplace de plugins
+- White-label solutions
+- Enterprise single sign-on
