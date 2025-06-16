@@ -151,21 +151,59 @@ class ModuleManager:
         self.save_modules_state()
         self.logger.info(f"Registered {len(modules_specs)} modules")
     
-    def create_execution_plan(self, modules_specs: Dict[str, ModuleSpec] = None) -> List[List[str]]:
-        """
-        Crear plan de ejecución respetando dependencias
+    # En core/module_manager.py
+    def create_execution_plan(self, modules: Dict[str, Any]) -> List[List[str]]:
+        """Crear plan de ejecución respetando dependencias"""
         
-        Args:
-            modules_specs: Especificaciones de módulos (opcional, usa registrados si no se provee)
+        # ✅ FIX: Manejar tanto ModuleSpec como dict
+        module_deps = {}
+        for name, module in modules.items():
+            if hasattr(module, 'dependencies'):
+                # Es un ModuleSpec object
+                module_deps[name] = module.dependencies
+            elif isinstance(module, dict) and 'dependencies' in module:
+                # Es un diccionario
+                module_deps[name] = module['dependencies']
+            else:
+                # Fallback
+                module_deps[name] = []
+        
+        # Algoritmo de ordenamiento topológico
+        phases = []
+        remaining_modules = set(module_deps.keys())
+        completed_modules = set()
+        
+        iteration = 0
+        max_iterations = len(module_deps) + 1
+        
+        while remaining_modules and iteration < max_iterations:
+            iteration += 1
             
-        Returns:
-            Lista de fases, cada fase contiene módulos que pueden ejecutarse en paralelo
-        """
+            # Encontrar módulos sin dependencias pendientes
+            ready_modules = []
+            for module in remaining_modules:
+                dependencies = module_deps[module]
+                # Filtrar dependencias que existen en nuestro proyecto
+                valid_deps = [dep for dep in dependencies if dep in module_deps]
+                
+                if all(dep in completed_modules for dep in valid_deps):
+                    ready_modules.append(module)
+            
+            if not ready_modules:
+                # Posible ciclo de dependencias
+                self.logger.warning("Possible dependency cycle detected")
+                # Tomar cualquier módulo restante para romper el ciclo
+                if remaining_modules:
+                    ready_modules = [next(iter(remaining_modules))]
+            
+            if ready_modules:
+                phases.append(ready_modules)
+                for module in ready_modules:
+                    remaining_modules.remove(module)
+                    completed_modules.add(module)
         
-        if modules_specs:
-            self.register_modules(modules_specs)
-        
-        return self.execution_order
+        self.logger.info(f"Created execution plan with {len(phases)} phases")
+        return phases
     
     def _calculate_execution_plan(self):
         """Calcular plan de ejecución usando ordenamiento topológico"""

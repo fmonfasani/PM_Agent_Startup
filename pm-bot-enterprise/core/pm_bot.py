@@ -294,21 +294,43 @@ class PMBotEnterprise:
         project = self.projects[project_id]
         
         # Obtener métricas en tiempo real
-        real_time_metrics = await self.orchestrator.get_project_metrics(project_id)
+        try:
+            real_time_metrics = await self.orchestrator.get_project_metrics(project_id)
+        except Exception as e:
+            self.logger.warning(f"Could not get real-time metrics: {e}")
+            real_time_metrics = {}
+        
+        # Procesar módulos de manera segura
+        modules_status = {}
+        for name, module in project.modules.items():
+            if hasattr(module, 'status'):
+                # Es un objeto con atributos
+                modules_status[name] = {
+                    "status": getattr(module, 'status', 'pending'),
+                    "progress": getattr(module, 'progress', 0),
+                    "agents": len(project.agents.get(name, []))
+                }
+            elif isinstance(module, dict):
+                # Es un diccionario
+                modules_status[name] = {
+                    "status": module.get("status", "pending"),
+                    "progress": module.get("progress", 0),
+                    "agents": len(project.agents.get(name, []))
+                }
+            else:
+                # Fallback
+                modules_status[name] = {
+                    "status": "unknown",
+                    "progress": 0,
+                    "agents": len(project.agents.get(name, []))
+                }
         
         return {
             "id": project.id,
             "name": project.config.name,
             "status": project.status.value,
             "progress": project.progress,
-            "modules": {
-                name: {
-                    "status": module.get("status", "pending"),
-                    "progress": module.get("progress", 0),
-                    "agents": len(project.agents.get(name, []))
-                }
-                for name, module in project.modules.items()
-            },
+            "modules": modules_status,
             "timeline": {
                 "start_time": project.start_time.isoformat(),
                 "estimated_completion": project.estimated_completion.isoformat(),
@@ -321,6 +343,7 @@ class PMBotEnterprise:
                 "active_agents": real_time_metrics.get("active_agents", 0)
             }
         }
+
     
     async def list_projects(self, status_filter: Optional[ProjectStatus] = None) -> List[Dict[str, Any]]:
         """Listar todos los proyectos con filtro opcional por estado"""
@@ -386,6 +409,7 @@ class PMBotEnterprise:
         self.logger.info(f"Project {project_id} resumed")
         return True
     
+    # En core/pm_bot.py - método save_project_state
     async def save_project_state(self, project_id: str):
         """Persistir estado del proyecto"""
         if project_id not in self.projects:
@@ -395,12 +419,21 @@ class PMBotEnterprise:
         project_file = f"data/project_{project_id}.json"
         
         project = self.projects[project_id]
+        
+        # Convertir AgentConfig a dict usando asdict
+        agents_serializable = {}
+        for module_name, agents_list in project.agents.items():
+            agents_serializable[module_name] = [
+                asdict(agent) if hasattr(agent, '__dict__') else agent 
+                for agent in agents_list
+            ]
+        
         project_data = {
             "id": project.id,
             "config": asdict(project.config),
             "status": project.status.value,
-            "modules": {name: asdict(module) for name, module in project.modules.items()},  # ← FIX AQUÍ
-            "agents": project.agents,
+            "modules": {name: asdict(module) if hasattr(module, "__dict__") else module for name, module in project.modules.items()},
+            "agents": agents_serializable,  # ← FIX: Usar versión serializable
             "progress": project.progress,
             "start_time": project.start_time.isoformat(),
             "estimated_completion": project.estimated_completion.isoformat(),
@@ -410,7 +443,7 @@ class PMBotEnterprise:
         }
         
         with open(project_file, 'w') as f:
-            json.dump(project_data, f, indent=2)
+            json.dump(project_data, f, indent=2, default=str)
     
     async def load_project_state(self, project_id: str) -> bool:
         """Cargar estado del proyecto desde disco"""

@@ -65,17 +65,6 @@ class TaskOrchestrator:
         execution_id = f"{project_id}_{module_name}_{int(datetime.now().timestamp())}"
         
         self.logger.info(f"Starting module execution: {module_name} (ID: {execution_id})")
-        if not agents:
-           raise ValueError(f"No agents provided for module {module_name}")
-            
-        # FIX: Registrar agentes en el spawner si no están registrados
-        registered_agents = []
-        for agent in agents:
-            if agent.id not in self.agent_spawner.active_agents:
-                self.logger.info(f"Registering agent {agent.id} in spawner")
-                self.agent_spawner.active_agents[agent.id] = agent
-            registered_agents.append(agent)
-            self.logger.info(f"Agent {agent.id} ({agent.role}) ready for module {module_name}")
         
         # Validar entrada
         if not agents:
