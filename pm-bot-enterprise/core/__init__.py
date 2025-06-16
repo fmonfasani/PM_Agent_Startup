@@ -1,81 +1,65 @@
 # core/__init__.py
 """
-PM Bot Enterprise Core Package
+PM Bot Enterprise - Core Module
+Sistema de gestión de proyectos con IA
 """
 
-from .pm_bot import PMBotEnterprise, ProjectConfig, ProjectStatus, ProjectState
-from .planner import ProjectPlanner, ModuleSpec
-from .agent_spawner import AgentSpawner, AgentConfig, AgentTask
-from .module_manager import ModuleManager, ModuleStatus, ModuleState
-from .task_orchestrator import TaskOrchestrator, ExecutionPlan
-from .ai_interface import AIInterface
-from .communication_manager import MCPCommunicationManager, MCPMessage, MessageType
-from .enhanced_agent import EnhancedAgent, AgentCapability, TaskResult
-
 __version__ = "1.0.0"
-__author__ = "PM Bot Enterprise Team"
 
-__all__ = [
-    # Main classes
-    "PMBotEnterprise",
-    "ProjectPlanner", 
-    "AgentSpawner",
-    "ModuleManager",
-    "TaskOrchestrator",
-    "AIInterface",
-    "MCPCommunicationManager",
-    "EnhancedAgent",
+# Imports principales ordenados para evitar dependencias circulares
+try:
+    # Primero los módulos sin dependencias
+    from .ai_interface import AIInterface
     
-    # Data classes
-    "ProjectConfig",
-    "ProjectState", 
-    "ModuleSpec",
-    "ModuleState",
-    "AgentConfig",
-    "AgentTask",
-    "AgentCapability",
-    "TaskResult",
-    "ExecutionPlan",
-    "MCPMessage",
+    # Luego los que dependen de ai_interface
+    from .planner import ProjectPlanner, ModuleSpec
     
-    # Enums
-    "ProjectStatus",
-    "ModuleStatus", 
-    "MessageType"
-]
-
-# Verificar dependencias críticas al importar
-def check_dependencies():
-    """Verificar que las dependencias críticas estén disponibles"""
-    missing_deps = []
+    # Después los módulos principales
+    from .pm_bot import PMBotEnterprise, ProjectConfig, ProjectStatus, ProjectState
+    from .module_manager import ModuleManager
+    from .agent_spawner import AgentSpawner
+    from .task_orchestrator import TaskOrchestrator
+    
+    # Finalmente los módulos de comunicación
+    from .communication_manager import MCPCommunicationManager
+    from .enhanced_agent import EnhancedAgent
+    
+    __all__ = [
+        'AIInterface',
+        'ProjectPlanner', 
+        'ModuleSpec',
+        'PMBotEnterprise',
+        'ProjectConfig',
+        'ProjectStatus', 
+        'ProjectState',
+        'ModuleManager',
+        'AgentSpawner',
+        'TaskOrchestrator',
+        'MCPCommunicationManager',
+        'EnhancedAgent'
+    ]
+    
+    print("✅ Core module loaded successfully")
+    
+except ImportError as e:
+    print(f"⚠️  Warning: Some core modules could not be imported: {e}")
+    # Import solo los módulos que funcionan
+    __all__ = []
     
     try:
-        import asyncio
+        from .ai_interface import AIInterface
+        __all__.append('AIInterface')
     except ImportError:
-        missing_deps.append("asyncio")
+        pass
     
     try:
-        import aiohttp
+        from .planner import ProjectPlanner
+        __all__.append('ProjectPlanner')
     except ImportError:
-        missing_deps.append("aiohttp")
+        pass
     
     try:
-        import json
+        from .pm_bot import PMBotEnterprise
+        __all__.append('PMBotEnterprise')
     except ImportError:
-        missing_deps.append("json")
-    
-    if missing_deps:
-        raise ImportError(f"Missing critical dependencies: {', '.join(missing_deps)}")
-
-# Ejecutar verificación al importar
-check_dependencies()
-
-# Configuración por defecto
-DEFAULT_CONFIG = {
-    "max_concurrent_projects": 5,
-    "default_team_size": 6,
-    "ai_models": {
-        "primary": "deepseek-r1:14b",
-        "fallback": ["claude-3-5-sonnet", "gpt-4o"]
-    }
-}
+        pass

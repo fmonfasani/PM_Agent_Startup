@@ -183,19 +183,19 @@ class AIInterface:
         return status
 
 
-# core/module_templates.py
-"""
-Templates para diferentes tipos de módulos
-"""
+# Remover la importación circular - ModuleTemplates se movió a planner.py
+# Si necesitas ModuleSpec aquí, usa TYPE_CHECKING o importación local dentro de métodos
 
-from typing import Dict, Any
-from .planner import ModuleSpec
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .planner import ModuleSpec
 
 
 class ModuleTemplates:
     """Plantillas reutilizables para módulos comunes"""
     
     def __init__(self):
+        # Las plantillas se definen localmente para evitar imports circulares
         self.templates = {
             'auth_module': {
                 'name': 'auth_module',
@@ -263,26 +263,9 @@ class ModuleTemplates:
             }
         }
     
-    def get_module_template(self, template_name: str) -> ModuleSpec:
+    def get_module_template(self, template_name: str) -> Optional[Dict[str, Any]]:
         """Obtener template de módulo por nombre"""
-        
-        if template_name not in self.templates:
-            return None
-        
-        template = self.templates[template_name]
-        
-        return ModuleSpec(
-            name=template['name'],
-            type=template['type'],
-            description=template['description'],
-            dependencies=template['dependencies'],
-            agents_needed=template['agents_needed'],
-            complexity=template['complexity'],
-            estimated_hours=template['estimated_hours'],
-            tech_stack=template['tech_stack'],
-            apis_needed=template['apis_needed'],
-            database_entities=template['database_entities']
-        )
+        return self.templates.get(template_name)
     
     def list_available_templates(self) -> List[str]:
         """Listar templates disponibles"""
@@ -290,4 +273,4 @@ class ModuleTemplates:
     
     def create_custom_template(self, name: str, template_data: Dict[str, Any]):
         """Crear template personalizado"""
-        self.templates[name] = template_data
+        self.templates[name] = template_data    
