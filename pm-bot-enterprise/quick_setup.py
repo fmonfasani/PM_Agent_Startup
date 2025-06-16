@@ -6,6 +6,7 @@ quick_setup.py - Setup rápido del entorno PM Bot Enterprise
 import os
 import sys
 from pathlib import Path
+import json
 
 def create_core_init():
     """Crear __init__.py correcto para el módulo core"""

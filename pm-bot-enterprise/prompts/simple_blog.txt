@@ -1,0 +1,11 @@
+Blog personal con CMS simple:
+- Sistema de posts con markdown
+- Comentarios básicos
+- Categorías y tags
+- Panel de administración
+- SEO optimizado
+- Responsive design
+
+Tecnologías: Next.js, Tailwind CSS
+Timeline: 1 mes
+Presupuesto: Básico ($5k)

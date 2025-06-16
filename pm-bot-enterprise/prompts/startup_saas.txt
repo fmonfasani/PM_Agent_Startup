@@ -1,0 +1,14 @@
+Crear plataforma SaaS de gestión de proyectos con:
+- Autenticación de usuarios y equipos
+- Dashboard con analytics en tiempo real  
+- Sistema de tareas con asignaciones
+- Notificaciones push y email
+- API REST completa
+- Panel de administración
+- Facturación con Stripe
+- Aplicación móvil (React Native)
+
+Tecnologías preferidas: Node.js, React, PostgreSQL, Redis
+Timeline: 3 meses
+Presupuesto: Startup ($50k)
+Compliance: GDPR

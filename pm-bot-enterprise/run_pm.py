@@ -9,11 +9,16 @@ import sys
 import os
 import json
 from pathlib import Path
+from datetime import datetime
 
 # Agregar el directorio actual al path para imports
 sys.path.append(str(Path(__file__).parent))
 
-from core.pm_bot import PMBotEnterprise
+try:
+    from core.pm_bot import PMBotEnterprise
+except ImportError as e:
+    print(f"Error importing PMBotEnterprise: {e}")
+    sys.exit(1)
 
 
 def setup_environment():
@@ -233,7 +238,7 @@ async def handle_custom_project(pm_bot):
     if description.lower() == 'cancelar':
         return
     
-    if len(description) < 10:
+    if not description or len(description.strip()) < 10:
         print("❌ Descripción muy corta. Proporciona más detalles.")
         return
     

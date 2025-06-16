@@ -1,0 +1,15 @@
+Desarrollar marketplace de productos artesanales con:
+- Catálogo de productos con búsqueda avanzada
+- Sistema de vendedores independientes
+- Carrito de compras y checkout
+- Pagos con Stripe y PayPal
+- Reviews y calificaciones
+- Chat en tiempo real entre compradores/vendedores
+- Sistema de envíos
+- Panel de analytics para vendedores
+- App móvil iOS/Android
+
+Tecnologías: MERN Stack (MongoDB, Express, React, Node.js)
+Timeline: 6 meses
+Presupuesto: Enterprise ($200k)
+Compliance: PCI DSS

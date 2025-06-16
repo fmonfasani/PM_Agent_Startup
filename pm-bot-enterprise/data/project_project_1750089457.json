@@ -1,0 +1,37 @@
+{
+  "id": "project_1750089457",
+  "config": {
+    "name": "taskmanagementengine",
+    "description": "Crear aplicaci\u00f3n web de gesti\u00f3n de tareas personal con React frontend, Node.js backend, autenticaci\u00f3n simple y CRUD de tareas",
+    "complexity": 2,
+    "timeline": "2-3 weeks",
+    "budget": "medium",
+    "requirements": [
+      "Implementaci\u00f3n de autenticaci\u00f3n simple utilizando JWT",
+      "Creaci\u00f3n de API REST para gesti\u00f3n de tareas",
+      "Desarrollo de la interfaz web utilizando React.js y Redux",
+      "Configuraci\u00f3n de la base de datos con MongoDB Atlas o PostgreSQL",
+      "Implementaci\u00f3n de cache utilizando Redis si se requiere alta velocidad de respuesta",
+      "Despliegue de la aplicaci\u00f3n en Docker + AWS",
+      "Configuraci\u00f3n del sistema de cola Apache Kafka si se requiere procesamiento de tareas en paralelo",
+      "Implementaci\u00f3n de b\u00fasqueda avanzada con Elmastiq si se requiere",
+      "Configuraci\u00f3n del monitoreo de rendimiento con Prometheus y Grafana",
+      "Desarrollo de pruebas unitarias y de interfaz utilizando Jest y Enzyme"
+    ],
+    "tech_stack": [
+      "backend: Node.js con Express.js",
+      "frontend: React.js con Redux para gesti\u00f3n de estado",
+      "database: MongoDB Atlas o PostgreSQL",
+      "cache: Redis si se requiere alta velocidad de respuesta",
+      "deployment: Docker + AWS",
+      "queue: Apache Kafka si se requiere procesamiento de tareas en paralelo",
+      "search: Elmastiq si se requiere b\u00fasqueda avanzada",
+      "monitoring: Prometheus y Grafana para monitoreo de rendimiento",
+      "testing: Jest y Enzyme para pruebas unitarias y de interfaz"
+    ],
+    "team_size": 2,
+    "compliance": []
+  },
+  "status": "planning",
+  "modules": {
+    "core_backend": 

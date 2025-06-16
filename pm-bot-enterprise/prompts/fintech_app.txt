@@ -1,0 +1,15 @@
+Aplicación fintech para gestión de inversiones con:
+- Dashboard de portfolio en tiempo real
+- Integración con APIs de mercados financieros
+- Sistema de alertas y notificaciones
+- Análisis de riesgo automatizado
+- Reportes y analytics avanzados
+- KYC/AML compliance
+- Autenticación biométrica
+- Trading automatizado
+- App móvil nativa
+
+Tecnologías: Python/FastAPI backend, React frontend, PostgreSQL
+Timeline: 8 meses  
+Presupuesto: Enterprise ($500k)
+Compliance: SOX, GDPR, regulatory compliance
