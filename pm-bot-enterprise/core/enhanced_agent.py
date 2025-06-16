@@ -827,3 +827,4 @@ Begin your response with a brief analysis of the task, then provide your solutio
         except Exception as e:
             self.logger.error(f"Error during shutdown: {e}")
             return False
+        
