@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # PM_Agent_Startup# 🤖 PM Bot Enterprise
 
 **Sistema de Gestión de Proyectos con Agentes IA Multi-Especializados**
